@@ -5,5 +5,5 @@ import { Todo } from '../models/model/todo.model';
   providedIn: 'root',
 })
 export class TodoSignalsService {
-  public todosState = signal<Array<Todo>>();
+  public todosState = signal<Array<Todo>>([]);
 }
