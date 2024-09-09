@@ -21,7 +21,14 @@
         Adicionar
       </button>
 
-      <button mat-raised-button color="warn" type="button">Cancelar</button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="handleCloseModal()"
+      >
+        Cancelar
+      </button>
     </div>
   </section>
 </form>

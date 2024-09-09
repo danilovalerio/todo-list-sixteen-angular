@@ -54,6 +54,11 @@ export class TodoFormComponent {
       const done = false;
 
       this.todoSignalsService.updateTodos({ id, title, description, done });
+      this.dialogRefService.close();
     }
+  }
+
+  public handleCloseModal(): void {
+    this.dialogRefService.close();
   }
 }
