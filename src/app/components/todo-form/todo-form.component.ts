@@ -1,3 +1,4 @@
+import { HeaderComponent } from './../header/header.component';
 import { TodoSignalsService } from './../../services/todo-signals.service';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
@@ -13,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { title } from 'process';
+import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-todo-form',
@@ -25,6 +27,7 @@ import { title } from 'process';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatDialogModule,
   ],
   templateUrl: './todo-form.component.html',
   styleUrl: './todo-form.component.scss',
@@ -32,6 +35,7 @@ import { title } from 'process';
 export class TodoFormComponent {
   private todoSignalsService = inject(TodoSignalsService); //injeta como se fosse via  construtor
 
+  private dialogRefService = inject(MatDialogRef<HeaderComponent>);
   public allTodos = this.todoSignalsService.todosState();
 
   public todosForm = new FormGroup({
