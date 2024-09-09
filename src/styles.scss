@@ -72,7 +72,7 @@ body {
 
 .todo_form_title {
   margin-top: 1rem !important;
-  color: white;
+  color: rgb(0, 105, 0);
   font-size: 30px !important;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
 }
@@ -86,8 +86,9 @@ body {
   margin-bottom: 1rem;
 }
 
-.todo_form_sucess_btn {
+.todo_form_success_btn {
   background-color: #125c42 !important;
+  color: white;
 }
 
 .todo_form_delete_btn {
@@ -129,5 +130,11 @@ body {
   color: #19976a !important;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
