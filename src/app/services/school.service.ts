@@ -15,7 +15,7 @@ export interface SchoolData {
 @Injectable({
   providedIn: 'root',
 })
-export class SchoolServiceService {
+export class SchoolService {
   private students: Array<SchoolData> = [
     { id: '1', name: 'Maria' },
     { id: '2', name: 'Jose' },
