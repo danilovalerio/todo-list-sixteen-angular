@@ -1,6 +1,13 @@
 import { Todo } from './../../models/model/todo.model';
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,6 +35,15 @@ export class TodoCardComponent implements OnInit {
   private todosSignal = this.todoSignalsService.todosState; //aqui contém o array de todos
   //computed para usarmos o valores computados, que depende dos valores de outro signal, por exemplo o signal que está no state, assim atualiza automaticamente
   public todosList = computed(() => this.todosSignal());
+
+  constructor() {
+    effect(() => {
+      console.log(
+        'SIGNAL FOI ATUALIZADO',
+        this.todoSignalsService.todosState()
+      );
+    });
+  }
 
   ngOnInit(): void {
     this.getTodosInLocalStorage();
