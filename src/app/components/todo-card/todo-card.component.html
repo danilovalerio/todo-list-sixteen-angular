@@ -1,4 +1,8 @@
-<mat-tab-group color="accent">
+<mat-tab-group color="accent" *ngIf="todosList().length > 0; else withoutTodos">
   <mat-tab label="Em andamento"></mat-tab>
   <mat-tab label="Concluídas"></mat-tab>
 </mat-tab-group>
+
+<ng-template #withoutTodos>
+  <h3 class="warn_message">Não há tarefas a serem exibidas.</h3>
+</ng-template>

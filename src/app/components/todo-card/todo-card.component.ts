@@ -27,7 +27,7 @@ export class TodoCardComponent implements OnInit {
   private todoSignalsService = inject(TodoSignalsService);
   private todosSignal = this.todoSignalsService.todosState; //aqui contém o array de todos
   //computed para usarmos o valores computados, que depende dos valores de outro signal, por exemplo o signal que está no state, assim atualiza automaticamente
-  private todosList = computed(() => this.todosSignal());
+  public todosList = computed(() => this.todosSignal());
 
   ngOnInit(): void {
     this.getTodosInLocalStorage();
