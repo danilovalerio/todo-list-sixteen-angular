@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SchoolData, SchoolService } from '../../services/school.service';
-import { Observable, zip } from 'rxjs';
+import { from, map, Observable, of, zip } from 'rxjs';
 import { response } from 'express';
 
 @Component({
@@ -19,10 +19,33 @@ export class SchoolDataComponent implements OnInit {
     this.getTeachersDatas()
   );
 
+  private ages = of(20, 30, 40, 50, 60, 700);
+
+  //From retorna um array iteravel
+  private peopleDatas = from([
+    { name: 'Joao', age: 20, profession: 'Analyst System' },
+    { name: 'Maria', age: 30, profession: 'UX Design' },
+    { name: 'Mateus', age: 40, profession: 'Scrum Master' },
+  ]);
+
   constructor(private schoolService: SchoolService) {}
 
   ngOnInit(): void {
-    this.getSchoolDatas();
+    //this.getSchoolDatas();
+    //this.getMultipliedAges();
+    this.getPeopleProfessions();
+  }
+
+  public getPeopleProfessions(): void {
+    this.peopleDatas.pipe(map((item) => item.profession)).subscribe({
+      next: (response) => console.log('PROFISSÃO ', response),
+    });
+  }
+
+  public getMultipliedAges(): void {
+    this.ages.pipe(map((age) => age * 2)).subscribe({
+      next: (response) => console.log('IDADE MULTIPLICADA', response),
+    });
   }
 
   public getSchoolDatas(): void {
