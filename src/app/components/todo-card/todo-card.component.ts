@@ -46,10 +46,13 @@ export class TodoCardComponent implements OnInit {
   }
 
   public handleDoneTodo(todoId: number) {
+    const updatedData = this.todosList().map((todo) =>
+      todo.id === todoId ? { ...todo, done: true } : todo
+    );
+
     if (todoId) {
-      this.todosSignal.set(
-        this.todosList().filter((item) => item.id == todoId)
-      );
+      this.todosSignal.set(updatedData);
+      this.saveTodosInLocalStorage();
     }
   }
 
@@ -59,6 +62,12 @@ export class TodoCardComponent implements OnInit {
 
       if (index !== -1) {
         this.todosSignal.set(this.todosList().splice(index, 1));
+        this.saveTodosInLocalStorage();
+      }
+
+      if (index === 0) {
+        const obj_empty = {} as Todo[];
+        this.todosSignal.set(obj_empty);
         this.saveTodosInLocalStorage();
       }
     }
