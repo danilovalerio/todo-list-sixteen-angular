@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SchoolData, SchoolService } from '../../services/school.service';
-import { filter, from, map, Observable, of, zip } from 'rxjs';
+import { filter, from, map, Observable, of, switchMap, zip } from 'rxjs';
 import { response } from 'express';
 
 @Component({
@@ -30,13 +30,42 @@ export class SchoolDataComponent implements OnInit {
     { name: 'Alcapaz', age: 50, profession: 'Software Developer' },
   ]);
 
+  private studentUserId = '2';
+
   constructor(private schoolService: SchoolService) {}
 
   ngOnInit(): void {
     //this.getSchoolDatas();
     //this.getMultipliedAges();
     //this.getPeopleProfessions();
-    this.getSoftwareDevelopersNames();
+    //this.getSoftwareDevelopersNames();
+    this.handleFindStudentsById();
+  }
+
+  public handleFindStudentsById(): void {
+    //ja carrega a lista de alunos
+    this.getStudentsDatas()
+      .pipe(
+        //switchMap espera a lista de dados atual
+        switchMap((listaStudents) =>
+          this.findStudentById(
+            listaStudents as Array<SchoolData>,
+            this.studentUserId
+          )
+        )
+      )
+      .subscribe({
+        next: (response: any) => {
+          console.log('Aluno filtrado: ', response);
+        },
+      });
+  }
+
+  public findStudentById(
+    students: Array<SchoolData>,
+    userId: string
+  ): Observable<SchoolData | undefined> {
+    return from([students.find((student) => student.id === userId)]);
   }
 
   public getSoftwareDevelopersNames(): void {
