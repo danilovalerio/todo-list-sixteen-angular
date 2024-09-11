@@ -22,7 +22,7 @@ export class AppComponent {
 
   title = 'todo-list-sixteen';
 
-  public handleEmitEvent(event: string): void {
-    this.outputEvent.emit(event);
+  public handleEmitEvent(): void {
+    this.outputEvent.emit(this.projectName);
   }
 }
