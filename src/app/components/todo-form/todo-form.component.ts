@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { title } from 'process';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { Todo } from '../../models/model/todo.model';
 
 @Component({
   selector: 'app-todo-form',
@@ -53,9 +54,16 @@ export class TodoFormComponent {
       const id = this.allTodos.length > 0 ? this.allTodos.length + 1 : 1;
       const done = false;
 
-      this.todoSignalsService.updateTodos({ id, title, description, done });
-      this.dialogRefService.close();
+      this.handleCreateTodo({ id, title, description, done });
+
+      //this.todoSignalsService.updateTodos({ id, title, description, done });
+      //this.dialogRefService.close();
     }
+  }
+
+  public handleCreateTodo(todo: Todo): void {
+    this.todoSignalsService.updateTodos(todo);
+    this.dialogRefService.close();
   }
 
   public handleCloseModal(): void {
