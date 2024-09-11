@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { first } from 'rxjs';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -42,5 +43,23 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     expect(component.projectName).toEqual('Teste Angular com Jest');
+  });
+
+  //Teste de @Output() e @Input()
+  it('should emit event with decorator correctly', () => {
+    component.projectName = 'Teste Angular com Jest 2';
+
+    //manipular observable
+    component.outputEvent
+      .pipe(
+        //pega primeiro item do nosso observable
+        first()
+      )
+      .subscribe({
+        next: (evento) => {
+          expect(evento).toEqual('Teste Angular com Jest 2');
+          component.handleEmitEvent();
+        },
+      });
   });
 });
