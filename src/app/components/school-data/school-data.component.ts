@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SchoolData, SchoolService } from '../../services/school.service';
-import { from, map, Observable, of, zip } from 'rxjs';
+import { filter, from, map, Observable, of, zip } from 'rxjs';
 import { response } from 'express';
 
 @Component({
@@ -26,6 +26,8 @@ export class SchoolDataComponent implements OnInit {
     { name: 'Joao', age: 20, profession: 'Analyst System' },
     { name: 'Maria', age: 30, profession: 'UX Design' },
     { name: 'Mateus', age: 40, profession: 'Scrum Master' },
+    { name: 'Catiopis', age: 60, profession: 'Software Developer' },
+    { name: 'Alcapaz', age: 50, profession: 'Software Developer' },
   ]);
 
   constructor(private schoolService: SchoolService) {}
@@ -33,7 +35,19 @@ export class SchoolDataComponent implements OnInit {
   ngOnInit(): void {
     //this.getSchoolDatas();
     //this.getMultipliedAges();
-    this.getPeopleProfessions();
+    //this.getPeopleProfessions();
+    this.getSoftwareDevelopersNames();
+  }
+
+  public getSoftwareDevelopersNames(): void {
+    this.peopleDatas
+      .pipe(
+        filter((people) => people.profession === 'Software Developer'),
+        map((people) => people.name)
+      )
+      .subscribe({
+        next: (response) => console.log('NOME DO DESENVOLVEDOR ', response),
+      });
   }
 
   public getPeopleProfessions(): void {
