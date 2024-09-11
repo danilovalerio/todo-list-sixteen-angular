@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { TodoCardComponent } from './components/todo-card/todo-card.component';
@@ -17,5 +17,7 @@ import { SchoolDataComponent } from './components/school-data/school-data.compon
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  @Input() public projectName!: string;
+
   title = 'todo-list-sixteen';
 }

@@ -33,4 +33,14 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('To-do List');
   });
+
+  // Teste de @Input()
+  it('should set @Input() property correctly', () => {
+    component.projectName = 'Teste Angular com Jest';
+
+    //chama o ciclo de vida de alteração do angular para detectar as alterações
+    fixture.detectChanges();
+
+    expect(component.projectName).toEqual('Teste Angular com Jest');
+  });
 });
